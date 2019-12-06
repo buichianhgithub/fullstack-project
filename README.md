@@ -1,6 +1,6 @@
 | Chi Anh Bui                         | Second Header | Third Header |
 | ------------------------------------| ------------- |------------- |
-| 101119448                           | Content Cell  | Content Cell |
+|             101119448               | Content Cell  | Content Cell |
 | https://github.com/buichianhgithub  | Content Cell  | Content Cell |
 <hr>
 
