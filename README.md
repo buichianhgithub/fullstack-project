@@ -1,4 +1,4 @@
-<h1> Fullstack Group <h1>
+<h1> Fullstack Group </h1>
 | Chi Anh Bui | Second Header | Third Header |
 | -------- | ------------- |------------- |
 | 101119448 | Content Cell  | Content Cell |
