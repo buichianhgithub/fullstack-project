@@ -12,3 +12,5 @@
 <h2>Clone project and work on new Branch</h1>
 <br>
 --Working on new branch not on master--
+<br>
+--Always pull updates before push--
