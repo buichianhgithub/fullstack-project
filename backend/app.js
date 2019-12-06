@@ -33,6 +33,7 @@ const Game = Mongoose.model("Game", gameSchema);
 // create playerSchema and Player model
 const playerSchema = Schema({
     name: String,
+    ranking: Number,
     score: Number,
     unavailable: Boolean,
     game: String
@@ -69,6 +70,7 @@ app.route("/players")
     .post(function (request, response) {
         const newPlayer = new Player({
             name: request.body.name,
+            ranking: request.body.ranking,
             score: request.body.score,
             unavailable: request.body.unavailable,
             game: request.body.game
@@ -109,13 +111,20 @@ app.route("/players/:id")
 
     // update player by id using put
     .put(function (request, response) {
-        Player.update({ _id: request.params.id }, { name: request.body.name, score: request.body.score, unavailable: request.body.unavailable, game: request.body.game }, { overwrite: true }, function (err) {
-            if (!err) {
-                response.send("Update successfully!");
-            } else {
-                response.send(err);
-            }
-        })
+        Player.update({ _id: request.params.id },
+            {
+                name: request.body.name,
+                ranking: request.body.ranking,
+                score: request.body.score,
+                unavailable: request.body.unavailable,
+                game: request.body.game
+            }, { overwrite: true }, function (err) {
+                if (!err) {
+                    response.send("Update successfully!");
+                } else {
+                    response.send(err);
+                }
+            })
     })
 
     // update player by id using patch
