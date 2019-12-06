@@ -1,7 +1,7 @@
-| Chi Anh Bui                         | Second Header | Third Header |
-| ------------------------------------| ------------- |------------- |
-|101119448| Content Cell  | Content Cell |
-| https://github.com/buichianhgithub  | Content Cell  | Content Cell |
+| Chi Anh Bui | Second Header | Third Header |
+| -------- | ------------- |------------- |
+| 101119448 | Content Cell  | Content Cell |
+| https://github.com/buichianhgithub | Content Cell  | Content Cell |
 <hr>
 
 Attempt | #1 | #2 | #3 | #4 | #5 | #6 | #7 | #8 | #9 | #10 | #11
