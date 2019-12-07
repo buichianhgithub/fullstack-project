@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 
 import { from } from 'rxjs';
 import { GuestScreenComponent } from './components/guest-screen/guest-screen.component';
+import { AdminScreenComponent } from './components/admin-screen/admin-screen.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { GuestScreenComponent } from './components/guest-screen/guest-screen.com
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    GuestScreenComponent
+    GuestScreenComponent,
+    AdminScreenComponent
   ],
   imports: [
     BrowserModule,
