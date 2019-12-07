@@ -1,11 +1,14 @@
 const Mongoose = require("mongoose");
 const BodyParser = require("body-parser");
 const Express = require("express");
+const Cors = require('cors');
 const Ejs = require("ejs");
 const Schema = require("mongoose").Schema;
 
 // creates an application instance using express
 const app = Express();
+
+app.use(Cors());
 
 // middleware
 app.use(BodyParser.json());
@@ -21,11 +24,11 @@ app.use(Express.static("public"));
 Mongoose.connect("mongodb://localhost:27017/projectDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
 // create adminSchema and Admin model
-const adminSchema = Schema({
-    username: { type: String, required: true, index: { unique: true } },
-    password: { type: String, required: true }
-});
-const Admin = Mongoose.model("Admin",adminSchema); 
+// const adminSchema = Schema({
+//     username: { type: String, required: true, unique:true},
+//     password: { type: String, required: true }
+// });
+// const Admin = Mongoose.model("Admin",adminSchema); 
 
 
 
