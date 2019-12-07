@@ -20,6 +20,14 @@ app.use(Express.static("public"));
 // connect local mongodb instance
 Mongoose.connect("mongodb://localhost:27017/projectDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
+// create adminSchema and Admin model
+const adminSchema = Schema({
+    username: { type: String, required: true, index: { unique: true } },
+    password: { type: String, required: true }
+});
+const Admin = Mongoose.model("Admin",adminSchema); 
+
+
 
 // create gameSchema and Game model
 const gameSchema = Schema({

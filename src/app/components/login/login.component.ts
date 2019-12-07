@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../users';
 
 @Component({
   selector: 'app-login',
@@ -6,14 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  isShow = false;
+  submitted = false;
+  model = new User(0,"admin","password");
   constructor() { }
 
   ngOnInit() {
     
   }
-
-  toggleDisplay(){
-    this.isShow = !this.isShow;
+  onSubmit(){
+    this.submitted = true;
   }
+
 }

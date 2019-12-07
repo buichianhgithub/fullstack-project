@@ -6,18 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./guest-screen.component.css']
 })
 export class GuestScreenComponent implements OnInit {
-  isShowLogin = false;
-  isShowTable = true;
+  
   constructor() { }
 
   ngOnInit() {
   }
 
-  DisplayLogin(){
-    this.isShowLogin = !this.isShowLogin;
-  }
-  DisplayTable(){
-    this.isShowTable = !this.isShowTable;
-  }
+  
 
 }
