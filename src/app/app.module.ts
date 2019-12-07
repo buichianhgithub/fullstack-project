@@ -8,6 +8,8 @@ import { MatCardModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -17,6 +19,7 @@ import { from } from 'rxjs';
 import { GuestScreenComponent } from './components/guest-screen/guest-screen.component';
 import { AdminScreenComponent } from './components/admin-screen/admin-screen.component';
 
+import { PlayerService } from './services/player.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { AdminScreenComponent } from './components/admin-screen/admin-screen.com
     HeaderComponent,
     LoginComponent,
     GuestScreenComponent,
-    AdminScreenComponent
+    AdminScreenComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -35,10 +39,12 @@ import { AdminScreenComponent } from './components/admin-screen/admin-screen.com
     FormsModule,
     MatCardModule,
     MatInputModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    MatTableModule
 
   ],
-  providers: [],
+  providers: [PlayerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
