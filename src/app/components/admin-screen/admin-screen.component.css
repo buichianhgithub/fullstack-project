@@ -21,3 +21,8 @@ mat-form-field,input{
     text-align: center;
     font-family: Roboto Mono;
 }
+
+mat-form-field{
+    width: 50%;
+    margin: auto;
+}

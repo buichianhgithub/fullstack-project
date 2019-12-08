@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -21,7 +23,6 @@ import { AdminScreenComponent } from './components/admin-screen/admin-screen.com
 
 import { PlayerService } from './services/playerService/player.service';
 import { GameService } from './services/gameService/game.service';
-import { GamesComponent } from './components/games/games.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,6 @@ import { GamesComponent } from './components/games/games.component';
     LoginComponent,
     GuestScreenComponent,
     AdminScreenComponent,
-    GamesComponent,
     
   ],
   imports: [
@@ -44,7 +44,8 @@ import { GamesComponent } from './components/games/games.component';
     MatInputModule,
     AppRoutingModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatTabsModule
 
   ],
   providers: [PlayerService,GameService],

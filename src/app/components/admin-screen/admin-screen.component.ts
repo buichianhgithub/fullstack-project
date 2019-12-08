@@ -2,6 +2,7 @@ import { Component, OnInit, ɵPlayer } from '@angular/core';
 import { PlayerService } from '../../services/playerService/player.service';
 import { DataSource } from '@angular/cdk/table';
 import { Player } from 'src/app/player';
+import { GameService } from 'src/app/services/gameService/game.service';
 
 @Component({
   selector: 'app-admin-screen',
@@ -10,13 +11,22 @@ import { Player } from 'src/app/player';
 })
 export class AdminScreenComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'ranking', 'score', 'unavailable', 'game', 'update', 'delete'];
+  displayedColumnsForPT: string[] = ['name', 'ranking', 'score', 'unavailable', 'game', 'update', 'delete'];
+  displayedColumnsForGT: string[] = ['title', 'platform', 'genre', 'rating', 'publisher', 'release', 'status'];
   players;
+  games;
 
-  constructor(private playerService: PlayerService) {  }
+  constructor(private playerService: PlayerService, private gameService: GameService) { }
 
   ngOnInit() {
     this.fetchPlayers();
+    this.fetchAllGames();
+  }
+
+  fetchAllGames() {
+    this.gameService.getAllGames().subscribe((data) => {
+      this.games = data;
+    })
   }
 
   fetchPlayers() {

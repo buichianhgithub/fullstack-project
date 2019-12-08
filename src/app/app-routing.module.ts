@@ -3,14 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { GuestScreenComponent } from './components/guest-screen/guest-screen.component';
 import { AdminScreenComponent } from './components/admin-screen/admin-screen.component';
-import { GamesComponent } from './components/games/games.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/guest', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'guest', component: GuestScreenComponent },
   { path: 'admin', component: AdminScreenComponent },
-  { path: 'admin/games', component: GamesComponent }
 ];
 
 @NgModule({

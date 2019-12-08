@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { request } from 'http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class PlayerService {
     return this.http.get(`${this.uri}/players`);
   }
 
-
   deletePlayerById(id){
     return this.http.delete(`${this.uri}/players/${id}`);
   }
+
 }
