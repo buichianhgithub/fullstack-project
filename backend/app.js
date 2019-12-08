@@ -2,7 +2,6 @@ const Mongoose = require("mongoose");
 const BodyParser = require("body-parser");
 const Express = require("express");
 const Cors = require('cors');
-const Ejs = require("ejs");
 const Schema = require("mongoose").Schema;
 
 // creates an application instance using express
@@ -13,9 +12,6 @@ app.use(Cors());
 // middleware
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
-
-// set view engine
-app.set("view engine", "ejs");
 
 // use static public folder
 app.use(Express.static("public"));
@@ -35,8 +31,13 @@ Mongoose.connect("mongodb://localhost:27017/projectDB", { useNewUrlParser: true,
 // create gameSchema and Game model
 const gameSchema = Schema({
     title: String,
-    year: String,
+    platform:String,
+    genre: String,
+    rating: String,
+    publisher:String,
+    release:String,
     status: String,
+
 });
 const Game = Mongoose.model("Game", gameSchema);
 
@@ -60,7 +61,7 @@ app.listen(3000, function () {
 app.route("/games").get(function (request, response) {
     Game.find(function (err, foundGames) {
         if (foundGames) {
-            response.send(foundGames);
+            response.json(foundGames);
         } else {
             response.send(err);
         }
@@ -73,7 +74,7 @@ app.route("/players")
     // get all players 
     .get(function (request, response) {
         Player.find(function (err, foundPlayers) {
-            response.send(foundPlayers);
+            response.json(foundPlayers);
         });
     })
 
@@ -86,9 +87,9 @@ app.route("/players")
             unavailable: request.body.unavailable,
             game: request.body.game
         });
-        newPlayer.save(function (err) {
+        newPlayer.save(function (err,updatedPlayer) {
             if (!err) {
-                response.send("Successfully added to database!");
+                response.json(updatedPlayer);
             } else {
                 response.send(err);
             }
@@ -97,9 +98,9 @@ app.route("/players")
 
     // delete all players
     .delete(function (request, response) {
-        Player.deleteMany(function (err) {
+        Player.deleteMany(function (err,deletedPlayer) {
             if (!err) {
-                response.send("Successfully delete all players!");
+                response.json(deletedPlayer);
             } else {
                 response.send(err);
             }
@@ -113,7 +114,7 @@ app.route("/players/:id")
     .get(function (request, response) {
         Player.findById({ _id: request.params.id }, function (err, foundPlayer) {
             if (foundPlayer) {
-                response.send(foundPlayer);
+                response.json(foundPlayer);
             } else {
                 response.send("Player not found!");
             }
@@ -129,9 +130,9 @@ app.route("/players/:id")
                 score: request.body.score,
                 unavailable: request.body.unavailable,
                 game: request.body.game
-            }, { overwrite: true }, function (err) {
+            }, { overwrite: true }, function (err,docs) {
                 if (!err) {
-                    response.send("Update successfully!");
+                    response.json(docs);
                 } else {
                     response.send(err);
                 }
@@ -140,9 +141,9 @@ app.route("/players/:id")
 
     // update player by id using patch
     .patch(function (request, response) {
-        Player.update({ _id: request.params.id }, { $set: request.body }, function (err) {
+        Player.update({ _id: request.params.id }, { $set: request.body }, function (err,docs) {
             if (!err) {
-                response.send("Update successfully");
+                response.json(docs);
             } else {
                 response.send(err)
             }
@@ -151,9 +152,9 @@ app.route("/players/:id")
 
     //delete player by id
     .delete(function (request, response) {
-        Player.remove({ _id: request.params.id }, function (err, foundPlayer) {
-            if (foundPlayer) {
-                response.send("Delete succcessfully!");
+        Player.remove({ _id: request.params.id }, function (err, docs) {
+            if (docs) {
+                response.json(docs);
             }
             else response.send(err);
         })

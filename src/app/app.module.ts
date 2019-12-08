@@ -19,7 +19,9 @@ import { from } from 'rxjs';
 import { GuestScreenComponent } from './components/guest-screen/guest-screen.component';
 import { AdminScreenComponent } from './components/admin-screen/admin-screen.component';
 
-import { PlayerService } from './services/player.service';
+import { PlayerService } from './services/playerService/player.service';
+import { GameService } from './services/gameService/game.service';
+import { GamesComponent } from './components/games/games.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { PlayerService } from './services/player.service';
     LoginComponent,
     GuestScreenComponent,
     AdminScreenComponent,
+    GamesComponent,
     
   ],
   imports: [
@@ -44,7 +47,7 @@ import { PlayerService } from './services/player.service';
     MatTableModule
 
   ],
-  providers: [PlayerService],
+  providers: [PlayerService,GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

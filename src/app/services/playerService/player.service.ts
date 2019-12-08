@@ -14,7 +14,8 @@ export class PlayerService {
     return this.http.get(`${this.uri}/players`);
   }
 
-  getPlayerById(id){
-    return this.http.get(`${this.uri}/players/${id}`);
+
+  deletePlayerById(id){
+    return this.http.delete(`${this.uri}/players/${id}`);
   }
 }
