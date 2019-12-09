@@ -1,8 +1,10 @@
-import { Component, OnInit, ɵPlayer } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PlayerService } from '../../services/playerService/player.service';
-import { DataSource } from '@angular/cdk/table';
-import { Player } from 'src/app/player';
 import { GameService } from 'src/app/services/gameService/game.service';
+import { UpdatePlayerComponent } from './../admin-screen/updates/update-player/update-player.component';
+import { CreatePlayerComponent } from './../admin-screen/updates/create-player/create-player.component';
+
 
 @Component({
   selector: 'app-admin-screen',
@@ -11,12 +13,12 @@ import { GameService } from 'src/app/services/gameService/game.service';
 })
 export class AdminScreenComponent implements OnInit {
 
-  displayedColumnsForPT: string[] = ['name', 'ranking', 'score', 'unavailable', 'game', 'update', 'delete'];
+  displayedColumnsForPT: string[] = ['name', 'ranking', 'time', 'score', 'status', 'game', 'update', 'delete'];
   displayedColumnsForGT: string[] = ['title', 'platform', 'genre', 'rating', 'publisher', 'release', 'status'];
   players;
   games;
 
-  constructor(private playerService: PlayerService, private gameService: GameService) { }
+  constructor(private playerService: PlayerService, private gameService: GameService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.fetchPlayers();
@@ -44,6 +46,31 @@ export class AdminScreenComponent implements OnInit {
     })
   }
 
+  // open dialog to show update component
+  openDialogUpdatePlayer(): void {
+    const dialogRef = this.dialog.open(UpdatePlayerComponent, {
+      width: '900px',
+      height: '600px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog closed!!");
+    });
+  }
+
+  // open dialog to show create component
+  openDialogCreatePlayer(): void {
+    const dialogRef = this.dialog.open(CreatePlayerComponent, {
+      width: '900px',
+      height: '600px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog closed!!");
+    });
+  }
 
 
 

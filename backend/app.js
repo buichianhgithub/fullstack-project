@@ -31,11 +31,11 @@ Mongoose.connect("mongodb://localhost:27017/projectDB", { useNewUrlParser: true,
 // create gameSchema and Game model
 const gameSchema = Schema({
     title: String,
-    platform:String,
+    platform: String,
     genre: String,
     rating: String,
-    publisher:String,
-    release:String,
+    publisher: String,
+    release: String,
     status: String,
 
 });
@@ -44,10 +44,11 @@ const Game = Mongoose.model("Game", gameSchema);
 
 // create playerSchema and Player model
 const playerSchema = Schema({
-    name: String,
-    ranking: Number,
+    name: { type: String, required: true },
+    ranking: { type: Number, required: true },
+    time: String,
     score: Number,
-    unavailable: Boolean,
+    status: { type: String, required: true },
     game: String
 });
 const Player = Mongoose.model("Player", playerSchema);
@@ -83,11 +84,12 @@ app.route("/players")
         const newPlayer = new Player({
             name: request.body.name,
             ranking: request.body.ranking,
+            time: request.body.time,
             score: request.body.score,
-            unavailable: request.body.unavailable,
+            status: request.body.status,
             game: request.body.game
         });
-        newPlayer.save(function (err,updatedPlayer) {
+        newPlayer.save(function (err, updatedPlayer) {
             if (!err) {
                 response.json(updatedPlayer);
             } else {
@@ -98,7 +100,7 @@ app.route("/players")
 
     // delete all players
     .delete(function (request, response) {
-        Player.deleteMany(function (err,deletedPlayer) {
+        Player.deleteMany(function (err, deletedPlayer) {
             if (!err) {
                 response.json(deletedPlayer);
             } else {
@@ -127,10 +129,11 @@ app.route("/players/:id")
             {
                 name: request.body.name,
                 ranking: request.body.ranking,
+                time: request.body.time,
                 score: request.body.score,
-                unavailable: request.body.unavailable,
+                status: request.body.status,
                 game: request.body.game
-            }, { overwrite: true }, function (err,docs) {
+            }, { overwrite: true }, function (err, docs) {
                 if (!err) {
                     response.json(docs);
                 } else {
@@ -141,7 +144,7 @@ app.route("/players/:id")
 
     // update player by id using patch
     .patch(function (request, response) {
-        Player.update({ _id: request.params.id }, { $set: request.body }, function (err,docs) {
+        Player.update({ _id: request.params.id }, { $set: request.body }, function (err, docs) {
             if (!err) {
                 response.json(docs);
             } else {
