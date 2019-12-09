@@ -1,55 +1,58 @@
 <div class="form-container">
-        <form class="update-form">
-            <mat-form-field>
-                <input matInput placeholder="Player" >
-            </mat-form-field>
-    
-            <mat-form-field>
-                <mat-select placeholder="Select A Rating">
-                    <mat-option value="1">1</mat-option>
-                    <mat-option value="2">2</mat-option>
-                    <mat-option value="3">3</mat-option>
-                    <mat-option value="4">4</mat-option>
-                    <mat-option value="5">5</mat-option>
-                    <mat-option value="6">6</mat-option>
-                    <mat-option value="7">7</mat-option>
-                    <mat-option value="8">8</mat-option>
-                    <mat-option value="9">9</mat-option>
-                    <mat-option value="10">10</mat-option>
-    
-    
-                </mat-select>
-            </mat-form-field>
-    
-            <mat-form-field>
-                <input matInput placeholder="Score">
-            </mat-form-field>
-    
-            <mat-form-field>
-                <input matInput placeholder="Time">
-            </mat-form-field>
-    
-            <mat-form-field>
-                <mat-select placeholder="Select A Game">
-                    <mat-option value="game1">game 1</mat-option>
-                    <mat-option value="game2">Game 2</mat-option>
-                    <mat-option value="game3">Game 3</mat-option>
-                </mat-select>
-            </mat-form-field>
-    
-            <mat-form-field>
-                <mat-select placeholder="Select A Status">
-                    <mat-option value='Available'>Available</mat-option>
-                    <mat-option value='Unavailable'>Unavailable</mat-option>
-                </mat-select>
-            </mat-form-field>
-    
-            <br>
-            <button class="btn btn-primary" type="submit" (click)="updatePlayer()">Update</button>
-            <br>
-            <button class="btn btn-danger" (click)="closeDialog()">Cancel</button>
-    
-    
-        </form>
-    
-    </div>
+    <form class="update-form">
+        <mat-form-field>
+            <input matInput placeholder="Player">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Select A Rating">
+                <mat-option value="1">1</mat-option>
+                <mat-option value="2">2</mat-option>
+                <mat-option value="3">3</mat-option>
+                <mat-option value="4">4</mat-option>
+                <mat-option value="5">5</mat-option>
+                <mat-option value="6">6</mat-option>
+                <mat-option value="7">7</mat-option>
+                <mat-option value="8">8</mat-option>
+                <mat-option value="9">9</mat-option>
+                <mat-option value="10">10</mat-option>
+
+
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Score">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Time">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Select A Game">
+                <mat-option value="game1">game 1</mat-option>
+                <mat-option value="game2">Game 2</mat-option>
+                <mat-option value="game3">Game 3</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Select A Status">
+                <mat-option value='Available'>Available</mat-option>
+                <mat-option value='Unavailable'>Unavailable</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <br>
+        <table>
+            <tr>
+                <td><button class="btn btn-primary" type="submit" (click)="updatePlayer()">Update</button></td>
+                <td><button class="btn btn-danger" (click)="closeDialog()">Cancel</button></td>
+            </tr>
+        </table>
+
+
+    </form>
+
+</div>
