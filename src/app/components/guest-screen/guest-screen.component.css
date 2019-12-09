@@ -15,4 +15,17 @@ mat-form-field,input{
     margin: auto;
     margin-top:60px ;
     border-radius:10px ;
+    background: #FCFBFB;
+}
+.card h1{
+    text-align: center;
+    font-family: Roboto Mono;
+}
+
+mat-form-field{
+    width: 50%;
+    margin: auto;
+}
+.btn-create-player{
+    width: 15%;
 }
