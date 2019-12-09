@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { PlayerService } from './../../../../services/playerService/player.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GameService } from 'src/app/services/gameService/game.service';
 
 @Component({
   selector: 'app-create-player',
@@ -12,9 +13,11 @@ import { Router } from '@angular/router';
 export class CreatePlayerComponent implements OnInit {
 
   players;
+  games;
+  heroes = ['1','2','3'];
   createForm: FormGroup;
   constructor(public dialogRef: MatDialogRef<CreatePlayerComponent>,
-    private playerService: PlayerService,
+    private playerService: PlayerService,private gameService:GameService,
     private formBuilder: FormBuilder) {
 
 // initialize form
@@ -30,7 +33,8 @@ export class CreatePlayerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fetchPlayers()
+    this.fetchPlayers();
+    this.fetchAllGames();
   }
 
   
@@ -43,7 +47,13 @@ export class CreatePlayerComponent implements OnInit {
 
   fetchPlayers() {
     this.playerService.getAllPlayers().subscribe((data) => {
-      this.players = data;
+      
+    })
+  }
+
+  fetchAllGames(){
+    this.gameService.getAllGames().subscribe(data=>{
+      this.games = data;
     })
   }
 

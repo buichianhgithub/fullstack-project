@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup,FormControl,Validators } from '@angular/forms';
+import { from } from 'rxjs';
+import { map, filter, catchError, mergeMap } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,42 +11,12 @@ import { FormGroup,FormControl,Validators } from '@angular/forms';
 export class PlayerService {
 
   uri = 'http://localhost:3000';
-
   constructor(private http: HttpClient) { }
-
-  form:FormGroup = new FormGroup({
-    _id: new FormControl(null),
-    name: new FormControl('', Validators.required),
-    ranking: new FormControl('', Validators.required),
-    time: new FormControl(''),
-    score: new FormControl(''),
-    game: new FormControl(''),
-    status: new FormControl('',Validators.required)
-  });
-
-  initializeFormGroup() {
-    this.form.setValue({
-      _id: null,
-      name: '',
-      ranking: '',
-      time: '',
-      score: '',
-      game: '',
-      status:''
-    });
-  }
-
-  populateForm(player) {
-    this.form.setValue(player);
-  }
-
-
 
 
 
   getAllPlayers() {
-    return this.http.get(`${this.uri}/players`);
-  }
+    return this.http.get(`${this.uri}/players`)};
 
   deletePlayerById(id) {
     return this.http.delete(`${this.uri}/players/${id}`);

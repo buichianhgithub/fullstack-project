@@ -31,8 +31,10 @@ export class UpdatePlayerComponent implements OnInit {
       });
   }
 
+  
+
   updatePlayer(name,ranking,time,score,game,status){
-    
+
   }
 
   ngOnInit() {
