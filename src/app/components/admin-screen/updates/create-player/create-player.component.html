@@ -1,11 +1,11 @@
 <div class="form-container">
-    <form class="update-form">
+    <form class="create-form" [formGroup]='createForm'>
         <mat-form-field>
-            <input matInput placeholder="Player">
+            <input matInput placeholder="Player" formControlName='name' #name>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-select placeholder="Select A Rating">
+            <mat-select placeholder="Select A Rating" formControlName='ranking' #ranking>
                 <mat-option value="1">1</mat-option>
                 <mat-option value="2">2</mat-option>
                 <mat-option value="3">3</mat-option>
@@ -22,15 +22,15 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput placeholder="Score">
+            <input matInput placeholder="Time" formControlName='time' #time>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput placeholder="Time">
+            <input matInput placeholder="Score" formControlName='score' #score>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-select placeholder="Select A Game">
+            <mat-select placeholder="Select A Game" formControlName='game' #game>
                 <mat-option value="game1">game 1</mat-option>
                 <mat-option value="game2">Game 2</mat-option>
                 <mat-option value="game3">Game 3</mat-option>
@@ -38,7 +38,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-select placeholder="Select A Status">
+            <mat-select placeholder="Select A Status" formControlName='status' #status>
                 <mat-option value='Available'>Available</mat-option>
                 <mat-option value='Unavailable'>Unavailable</mat-option>
             </mat-select>
@@ -47,7 +47,9 @@
         <br>
         <table>
             <tr>
-                <td><button class="btn btn-primary" type="submit" (click)="updatePlayer()">Update</button></td>
+                <td><button class="btn btn-secondary" type="submit"
+                        (click)="addPlayer(name.value,ranking.value,time.value,score.value,game.value,status.value)"
+                        [disabled]="createForm.pristine || createForm.invalid">Create</button></td>
                 <td><button class="btn btn-danger" (click)="closeDialog()">Cancel</button></td>
             </tr>
         </table>

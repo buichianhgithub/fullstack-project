@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit,Inject} from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { PlayerService } from '../../services/playerService/player.service';
 import { GameService } from 'src/app/services/gameService/game.service';
 import { UpdatePlayerComponent } from './../admin-screen/updates/update-player/update-player.component';
 import { CreatePlayerComponent } from './../admin-screen/updates/create-player/create-player.component';
+import { Player } from './../../player';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,8 +19,10 @@ export class AdminScreenComponent implements OnInit {
   displayedColumnsForGT: string[] = ['title', 'platform', 'genre', 'rating', 'publisher', 'release', 'status'];
   players;
   games;
+  id;
+  player;
 
-  constructor(private playerService: PlayerService, private gameService: GameService, public dialog: MatDialog) { }
+  constructor(private playerService: PlayerService, private gameService: GameService, public dialog: MatDialog,private route:ActivatedRoute) { }
 
   ngOnInit() {
     this.fetchPlayers();
@@ -37,6 +41,8 @@ export class AdminScreenComponent implements OnInit {
     })
   }
 
+
+
   deletePlayer(id) {
     var players = this.players;
     this.playerService.deletePlayerById(id).subscribe((data) => {
@@ -46,7 +52,6 @@ export class AdminScreenComponent implements OnInit {
     })
   }
 
-  // open dialog to show update component
   openDialogUpdatePlayer(): void {
     const dialogRef = this.dialog.open(UpdatePlayerComponent, {
       width: '900px',
@@ -55,9 +60,12 @@ export class AdminScreenComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log("Dialog closed!!");
+      this.ngOnInit();
+      
     });
   }
+
+  
 
   // open dialog to show create component
   openDialogCreatePlayer(): void {
@@ -68,7 +76,8 @@ export class AdminScreenComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log("Dialog closed!!");
+      this.ngOnInit();
+      
     });
   }
 

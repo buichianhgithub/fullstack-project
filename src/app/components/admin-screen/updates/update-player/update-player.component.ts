@@ -1,6 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PlayerService } from './../../../../services/playerService/player.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Player } from 'src/app/player';
+
+
 
 @Component({
   selector: 'app-update-player',
@@ -9,8 +13,26 @@ import { PlayerService } from './../../../../services/playerService/player.servi
 })
 export class UpdatePlayerComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<UpdatePlayerComponent>,private playerService:PlayerService) {
+  id: String;
+  players;
+  updateForm: FormGroup;
 
+  constructor(public dialogRef: MatDialogRef<UpdatePlayerComponent>,
+    private playerService: PlayerService,
+    private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data:Player) {
+
+      this.updateForm = this.formBuilder.group({
+        name: ['', Validators.required],
+        ranking: ['', Validators.required],
+        time: '',
+        score: '',
+        game: '',
+        status: ['', Validators.required]
+      });
+  }
+
+  updatePlayer(name,ranking,time,score,game,status){
+    
   }
 
   ngOnInit() {
@@ -21,9 +43,5 @@ export class UpdatePlayerComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  updatePlayer(){
-    this.closeDialog();
-    console.log("Player updated!!")
-  }
 
 }

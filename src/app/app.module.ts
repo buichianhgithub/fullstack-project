@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -29,6 +30,7 @@ import { PlayerService } from './services/playerService/player.service';
 import { GameService } from './services/gameService/game.service';
 import { UpdatePlayerComponent } from './components/admin-screen/updates/update-player/update-player.component';
 import { CreatePlayerComponent } from './components/admin-screen/updates/create-player/create-player.component';
+import { JoinGameComponent } from './components/guest-screen/join-game/join-game.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { CreatePlayerComponent } from './components/admin-screen/updates/create-
     AdminScreenComponent,
     UpdatePlayerComponent,
     CreatePlayerComponent,
+    JoinGameComponent,
     
   ],
   imports: [
@@ -55,12 +58,13 @@ import { CreatePlayerComponent } from './components/admin-screen/updates/create-
     MatTableModule,
     MatTabsModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule
 
   ],
-  exports: [ UpdatePlayerComponent,CreatePlayerComponent ]  
+  exports: [ UpdatePlayerComponent,CreatePlayerComponent,JoinGameComponent ]  
   ,
-  entryComponents: [UpdatePlayerComponent,CreatePlayerComponent]
+  entryComponents: [UpdatePlayerComponent,CreatePlayerComponent,JoinGameComponent]
   ,
   providers: [PlayerService,GameService],
   bootstrap: [AppComponent]
