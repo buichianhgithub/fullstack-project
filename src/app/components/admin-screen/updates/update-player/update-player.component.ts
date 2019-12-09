@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { PlayerService } from './../../../../services/playerService/player.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Player } from 'src/app/player';
+import { GameService } from 'src/app/services/gameService/game.service';
 
 
 
@@ -15,30 +16,31 @@ export class UpdatePlayerComponent implements OnInit {
 
   id: String;
   players;
-  updateForm: FormGroup;
+  games;
 
   constructor(public dialogRef: MatDialogRef<UpdatePlayerComponent>,
-    private playerService: PlayerService,
-    private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data:Player) {
+    private playerService: PlayerService,private gameService:GameService,
+    private formBuilder: FormBuilder) {
 
-      this.updateForm = this.formBuilder.group({
-        name: ['', Validators.required],
-        ranking: ['', Validators.required],
-        time: '',
-        score: '',
-        game: '',
-        status: ['', Validators.required]
-      });
   }
 
-  
+  fetchAllGames(){
+    this.gameService.getAllGames().subscribe(data=>{
+      this.games = data;
+    })
+  }
 
-  updatePlayer(name,ranking,time,score,game,status){
-
+  updatePlayer(id,name,ranking,time,score,game,status){
+    this.playerService.updatePlayer(id,name,ranking,time,score,game,status).subscribe(data=>{
+      this.playerService.initializeFormGroup();
+      this.closeDialog();
+      console.log(id);
+    });
+    
   }
 
   ngOnInit() {
-
+    this.fetchAllGames();
   }
 
   closeDialog() {

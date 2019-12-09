@@ -52,13 +52,17 @@ export class AdminScreenComponent implements OnInit {
     })
   }
 
-  
 
-  openDialogUpdatePlayer(): void {
+
+  openDialogUpdatePlayer(element): void {
+
+
+    this.playerService.populateForm(element);//changed here
     const dialogRef = this.dialog.open(UpdatePlayerComponent, {
       width: '900px',
       height: '600px',
       disableClose: true,
+      autoFocus:true
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -75,6 +79,7 @@ export class AdminScreenComponent implements OnInit {
       width: '900px',
       height: '600px',
       disableClose: true,
+      autoFocus:true
     });
 
     dialogRef.afterClosed().subscribe(result => {

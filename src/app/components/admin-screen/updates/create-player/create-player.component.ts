@@ -14,22 +14,13 @@ export class CreatePlayerComponent implements OnInit {
 
   players;
   games;
-  heroes = ['1','2','3'];
   createForm: FormGroup;
   constructor(public dialogRef: MatDialogRef<CreatePlayerComponent>,
     private playerService: PlayerService,private gameService:GameService,
     private formBuilder: FormBuilder) {
 
 // initialize form
-    this.createForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      ranking: ['', Validators.required],
-      time: '',
-      score: '',
-      game: '',
-      status: ['', Validators.required]
-
-    });
+   this.playerService.initializeFormGroup();
   }
 
   ngOnInit() {
@@ -47,7 +38,7 @@ export class CreatePlayerComponent implements OnInit {
 
   fetchPlayers() {
     this.playerService.getAllPlayers().subscribe((data) => {
-      
+      this.players = data;
     })
   }
 

@@ -1,5 +1,6 @@
 <div class="form-container">
-    <form class="update-form" [formGroup]="updateForm">
+    <form class="update-form" [formGroup]="playerService.form">
+        <input hidden matInput formControlName='_id' #_id>
         <mat-form-field>
             <input matInput placeholder="Player" formControlName='name' #name>
         </mat-form-field>
@@ -26,15 +27,14 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput placeholder="Score" formControlName='score' #score> 
+            <input matInput placeholder="Score" formControlName='score' #score>
         </mat-form-field>
 
         <mat-form-field>
-            <mat-select placeholder="Select A Game" formControlName='game' #game>
-                <mat-option value="game1">game 1</mat-option>
-                <mat-option value="game2">Game 2</mat-option>
-                <mat-option value="game3">Game 3</mat-option>
-            </mat-select>
+                <mat-select placeholder="Select A Game" formControlName='game' #game>
+                        <mat-option [value]="game.title" *ngFor="let game of games ">{{game.title}}</mat-option>
+                        
+                    </mat-select>
         </mat-form-field>
 
         <mat-form-field>
@@ -47,14 +47,13 @@
         <br>
         <table>
             <tr>
-                <td><button class="btn btn-primary" type="submit" 
-                    (click)="updatePlayer(name.value,ranking.value,time.value,score.value,game.value,status.value)"
-                    [disabled]="updateForm.pristine || updateForm.invalid"
-                    >Update</button></td>
+                <td><button class="btn btn-primary"
+                        (click)="updatePlayer(_id.value,name.value,ranking.value,time.value,score.value,game.value,status.value)"
+                        [disabled]="playerService.form.pristine || playerService.form.invalid">Update</button></td>
                 <td><button class="btn btn-danger" (click)="closeDialog()">Cancel</button></td>
             </tr>
         </table>
-        
+
 
 
     </form>

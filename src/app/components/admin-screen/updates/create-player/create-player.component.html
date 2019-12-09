@@ -1,5 +1,6 @@
 <div class="form-container">
-    <form class="create-form" [formGroup]='createForm'>
+    <form class="create-form" [formGroup]='playerService.form'>
+            <input type="hidden" formControlName="_id">
         <mat-form-field>
             <input matInput placeholder="Player" formControlName='name' #name>
         </mat-form-field>
@@ -16,7 +17,6 @@
                 <mat-option value="8">8</mat-option>
                 <mat-option value="9">9</mat-option>
                 <mat-option value="10">10</mat-option>
-
 
             </mat-select>
         </mat-form-field>
@@ -48,7 +48,7 @@
             <tr>
                 <td><button class="btn btn-secondary" type="submit"
                         (click)="addPlayer(name.value,ranking.value,time.value,score.value,game.value,status.value)"
-                        [disabled]="createForm.pristine || createForm.invalid">Create</button></td>
+                        [disabled]="playerService.form.pristine || playerService.form.invalid">Create</button></td>
                 <td><button class="btn btn-danger" (click)="closeDialog()">Cancel</button></td>
             </tr>
         </table>
