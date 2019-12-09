@@ -52,6 +52,8 @@ export class AdminScreenComponent implements OnInit {
     })
   }
 
+  
+
   openDialogUpdatePlayer(): void {
     const dialogRef = this.dialog.open(UpdatePlayerComponent, {
       width: '900px',

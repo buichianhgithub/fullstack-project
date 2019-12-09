@@ -49,9 +49,10 @@
 
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Action </th>
-            <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary"
+            <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" *ngIf= "element.status === 'Available'"
                     (click)="openDialogUpdatePlayer()">Join</button>
             </td>
+            
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
