@@ -31,6 +31,7 @@ import { GameService } from './services/gameService/game.service';
 import { UpdatePlayerComponent } from './components/admin-screen/updates/update-player/update-player.component';
 import { CreatePlayerComponent } from './components/admin-screen/updates/create-player/create-player.component';
 import { JoinGameComponent } from './components/guest-screen/join-game/join-game.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { JoinGameComponent } from './components/guest-screen/join-game/join-game
     UpdatePlayerComponent,
     CreatePlayerComponent,
     JoinGameComponent,
+    RegisterComponent,
     
   ],
   imports: [

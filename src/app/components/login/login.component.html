@@ -5,16 +5,14 @@
 
 <div class="card">
     <h1>Login Form</h1>
-    <form>
+    <form (submit)="onLoginSubmit()">
         <div class="form-group">
-            <input placeholder="Username" type="email" class="form-control" 
-                >
+            <input placeholder="Username" type="email" class="form-control" [(ngModel)]="username" name="username">
         </div>
         <div class="form-group">
-            <input placeholder="Password" type="password" class="form-control" >
+            <input placeholder="Password" type="password" class="form-control" [(ngModel)]="password" name="password">
         </div>
-        <button type="submit" class="btn btn-primary" routerLink="/admin">Sign In</button>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+        <button type="submit" class="btn btn-success" routerLink="/register">Register</button><br>
     </form>
 </div>
-
-
