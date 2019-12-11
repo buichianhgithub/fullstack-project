@@ -9,11 +9,14 @@ import { MatInputModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { MatTableModule } from '@angular/material';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatSelectModule} from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messages';
+
 
 
 
@@ -28,6 +31,11 @@ import { AdminScreenComponent } from './components/admin-screen/admin-screen.com
 
 import { PlayerService } from './services/playerService/player.service';
 import { GameService } from './services/gameService/game.service';
+import { AuthService } from './services/authService/auth.service';
+import { ValidateService } from './services/validateService/validate.service';
+
+
+
 import { UpdatePlayerComponent } from './components/admin-screen/updates/update-player/update-player.component';
 import { CreatePlayerComponent } from './components/admin-screen/updates/create-player/create-player.component';
 import { JoinGameComponent } from './components/guest-screen/join-game/join-game.component';
@@ -45,6 +53,7 @@ import { RegisterComponent } from './components/register/register.component';
     JoinGameComponent,
     RegisterComponent,
     
+
   ],
   imports: [
     BrowserModule,
@@ -61,14 +70,16 @@ import { RegisterComponent } from './components/register/register.component';
     MatTabsModule,
     MatDialogModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlashMessagesModule,
+    HttpModule
 
   ],
-  exports: [ UpdatePlayerComponent,CreatePlayerComponent,JoinGameComponent ]  
+  exports: [UpdatePlayerComponent, CreatePlayerComponent, JoinGameComponent]
   ,
-  entryComponents: [UpdatePlayerComponent,CreatePlayerComponent,JoinGameComponent]
+  entryComponents: [UpdatePlayerComponent, CreatePlayerComponent, JoinGameComponent]
   ,
-  providers: [PlayerService,GameService],
+  providers: [PlayerService, GameService, AuthService, ValidateService, FlashMessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
