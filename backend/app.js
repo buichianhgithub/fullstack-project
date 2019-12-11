@@ -1,164 +1,75 @@
-const Mongoose = require("mongoose");
-const BodyParser = require("body-parser");
-const Express = require("express");
-const Cors = require('cors');
-const Schema = require("mongoose").Schema;
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const passport = require('passport');
+const mongoose = require('mongoose');
+const config = require('./config/database');
+const Schema = mongoose.Schema;
 
 // creates an application instance using express
-const app = Express();
+const app = express();
 
-app.use(Cors());
+// // Port Number
+// const port = process.env.PORT || 8080;
 
-// middleware
-app.use(BodyParser.json());
-app.use(BodyParser.urlencoded({ extended: true }));
+// On Connection
+mongoose.connection.on('connected', () => {
+    console.log('Connected to Database ' + config.database);
+});
+
+// On Error
+mongoose.connection.on('error', (err) => {
+    console.log('Database error ' + err);
+});
+
+// Cors middleware
+app.use(cors());
+
+// BodyParsermiddleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
+
+const users = require('./routes/users');
+const games = require('./routes/games');
+const players = require('./routes/players');
+
+app.use('/users', users);
+app.use('/games', games);
+app.use('/players', players);
+
+// Index Route
+app.get('/', (req, res) => {
+    res.send('invaild endpoint');
+});
 
 // use static public folder
-app.use(Express.static("public"));
+app.use(express.static("public"));
 
 // connect local mongodb instance
-Mongoose.connect("mongodb://localhost:27017/projectDB", { useNewUrlParser: true, useUnifiedTopology: true });
-
-// create adminSchema and Admin model
-// const adminSchema = Schema({
-//     username: { type: String, required: true, unique:true},
-//     password: { type: String, required: true }
-// });
-// const Admin = Mongoose.model("Admin",adminSchema); 
+mongoose.connect("mongodb://localhost:27017/projectDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 
-// create gameSchema and Game model
-const gameSchema = Schema({
-    title: String,
-    platform: String,
-    genre: String,
-    rating: String,
-    publisher: String,
-    release: String,
-    status: String,
-
+const port = 3000;
+// Start Server
+app.listen(port, () => {
+    console.log('Server started on port ' + port);
 });
-const Game = Mongoose.model("Game", gameSchema);
 
 
-// create playerSchema and Player model
-const playerSchema = Schema({
-    name: { type: String, required: true },
-    ranking: { type: Number, required: true },
-    time: String,
-    score: Number,
-    status: { type: String, required: true },
-    game: String
-});
-const Player = Mongoose.model("Player", playerSchema);
-
-// test connection
-app.listen(3000, function () {
-    console.log("Server started on port 3000");
-})
-
-// get all games
-app.route("/games").get(function (request, response) {
-    Game.find(function (err, foundGames) {
-        if (foundGames) {
-            response.json(foundGames);
-        } else {
-            response.send(err);
-        }
-    })
-})
-
-// chained route handlers using express
-app.route("/players")
-
-    // get all players 
-    .get(function (request, response) {
-        Player.find(function (err, foundPlayers) {
-            response.json(foundPlayers);
-        });
-    })
-
-    // create new player
-    .post(function (request, response) {
-        const newPlayer = new Player({
-            name: request.body.name,
-            ranking: request.body.ranking,
-            time: request.body.time,
-            score: request.body.score,
-            status: request.body.status,
-            game: request.body.game
-        });
-        newPlayer.save(function (err, updatedPlayer) {
-            if (!err) {
-                response.json(updatedPlayer);
-            } else {
-                response.send(err);
-            }
-        });
-    })
-
-    // delete all players
-    .delete(function (request, response) {
-        Player.deleteMany(function (err, deletedPlayer) {
-            if (!err) {
-                response.json(deletedPlayer);
-            } else {
-                response.send(err);
-            }
-        })
-    });
 
 
-app.route("/players/:id")
 
-    // get player by id
-    .get(function (request, response) {
-        Player.findById({ _id: request.params.id }, function (err, foundPlayer) {
-            if (foundPlayer) {
-                response.json(foundPlayer);
-            } else {
-                response.send("Player not found!");
-            }
-        })
-    })
 
-    // update player by id using put
-    .put(function (request, response) {
-        Player.update({ _id: request.params.id },
-            {
-                name: request.body.name,
-                ranking: request.body.ranking,
-                time: request.body.time,
-                score: request.body.score,
-                status: request.body.status,
-                game: request.body.game
-            }, { overwrite: true }, function (err, docs) {
-                if (!err) {
-                    response.json(docs);
-                } else {
-                    response.send(err);
-                }
-            })
-    })
 
-    // update player by id using patch
-    .patch(function (request, response) {
-        Player.update({ _id: request.params.id }, { $set: request.body }, function (err, docs) {
-            if (!err) {
-                response.json(docs);
-            } else {
-                response.send(err)
-            }
-        })
-    })
 
-    //delete player by id
-    .delete(function (request, response) {
-        Player.remove({ _id: request.params.id }, function (err, docs) {
-            if (docs) {
-                response.json(docs);
-            }
-            else response.send(err);
-        })
-    })
+
+
+
+
